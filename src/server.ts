@@ -26,6 +26,22 @@ app.get('/games', async (request, response) => {
     return response.json(games);
 })
 
+//listar game por id
+
+app.get('/games/:id', async (request, response) => {
+    const gameId = request.params.id;
+
+    const games = await prisma.game.findFirst({
+        select: {
+            id: gameId,
+        }
+        
+        
+    })
+
+    return response.json(games);
+})
+
 //criar anuncio
 app.post('/games/:gameId/ads', async (request, response) => {
     const gameId = request.params.gameId;
